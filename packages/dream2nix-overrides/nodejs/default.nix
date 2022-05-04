@@ -96,5 +96,11 @@ in
 
   excalidraw.build = {
     nativeBuildInputs = [ pkgs.yarn ];
+
+    installPhase = ''
+      mv $out/lib/node_modules/*/build $out/dist
+      rm -rf $out/lib
+      find $out/dist -type f -name "*.map" -delete
+    '';
   };
 }
