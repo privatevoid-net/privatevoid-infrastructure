@@ -93,4 +93,8 @@ in
         --set NODE_PATH "$out/lib/node_modules/uptime-kuma/node_modules"
     '';
   };
+
+  excalidraw.build = {
+    nativeBuildInputs = [ pkgs.yarn ];
+  };
 }
