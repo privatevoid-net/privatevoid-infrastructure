@@ -42,6 +42,19 @@ in
     in
       lib.recursiveUpdate uptime-kuma { meta.platforms = [ "x86_64-linux" ]; };
 
+    excalidraw = let
+      dream = dream2nix.makeFlakeOutputs {
+        source = builtins.fetchTree {
+          type = "github";
+          owner = "excalidraw";
+          repo = "excalidraw";
+          rev = "0896892f8ad03f42d1bd8312fe6bd938f6a3f8aa"; # 0.11.0
+        };
+      };
+      inherit (dream.packages.${system}) excalidraw;
+    in
+      lib.recursiveUpdate excalidraw { meta.platforms = [ "x86_64-linux" ]; };
+
     hyprspace = pkgs.callPackage ./networking/hyprspace { iproute2mac = null; };
 
     minio-console = pkgs.callPackage ./servers/minio-console { };
